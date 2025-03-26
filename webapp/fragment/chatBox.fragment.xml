@@ -1,0 +1,47 @@
+<core:FragmentDefinition xmlns="sap.m"
+    xmlns:f="sap.f"
+    xmlns:core="sap.ui.core"
+    xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
+    <FlexBox id="ChatBot" class="ChatBox" direction="Column" >
+        <!-- <Bar class="chatHeaderBar">
+            <contentLeft>
+                <Button app:target="showHistory" icon="sap-icon://customer-history" press="onChatAction" class="chatCloseButton"  visible="{= !${chatModel>/showHistory}}"/>
+                <Button app:target="showHistory" icon="sap-icon://message-popup" press="onChatAction" class="chatCloseButton" visible="{chatModel>/showHistory}"/>
+                <Title text="{i18n>chatTitle}" class="chatHeaderTitle"/>
+            </contentLeft>
+            <contentRight>
+                <Button app:target="refresh" icon="sap-icon://refresh" press="onChatAction" class="chatCloseButton" />
+                <Button app:target="max" icon="sap-icon://expand" press="onChatAction" class="chatCloseButton" visible="{chatModel>/isMinimize}"/>
+                <Button app:target="min" icon="sap-icon://minimize" press="onChatAction" class="chatCloseButton" visible="{= !${chatModel>/isMinimize}}"/>
+                <Button app:target="fullScreen" icon="sap-icon://full-screen" press="onChatAction" class="chatCloseButton" visible="{= !${chatModel>/isFullScreen}}"/>
+                <Button app:target="exitFullScreen" icon="sap-icon://exit-full-screen" press="onChatAction" class="chatCloseButton" visible="{chatModel>/isFullScreen}"/>
+                <Button app:target="close" icon="sap-icon://decline" press="onChatAction" class="chatCloseButton" />
+            </contentRight>
+        </Bar> -->
+        <FlexBox direction="Column" id="chatMessageBox" class="contentFlex" >
+            <FlexBox direction="Column" class="contentFlex" visible="{= !${chatModel>/isMinimize}}">
+                <ScrollContainer id="scrollChatBox" height="100%" width="100%" vertical="true" focusable="true">
+                    <FlexBox id="dynamicChatBox" direction="Column">
+                    </FlexBox>
+                </ScrollContainer>
+
+            </FlexBox>
+            <FlexBox class="chatFooter" visible="{= !${chatModel>/isMinimize}}">
+                <FeedInput id="chatFeedInput"  post="onUserChat" showIcon="false" width="100%"  class=" chatFeed" />
+            </FlexBox>
+        </FlexBox>
+        <!-- <FlexBox id="chatHistory" class="chatHistory" visible="{chatModel>/showHistory}">
+            <List items="{path: 'shaeQueryModel>/Conversations'}" class="chatHistoryList"
+				selectionChange=".onSelectionChange"
+				mode="SingleSelectMaster"
+				includeItemInSelection="true">
+				<CustomListItem class="chatHistoryListItem sapUiTinyMarginTopBottom">
+					<VBox class="sapUiTinyMarginBegin">
+							<Text text="{shaeQueryModel>chatName}" class="textBold  systemIDTxt"/>
+							<Text text="{shaeQueryModel>modifiedAt}" class="font07"/>
+						</VBox>
+				</CustomListItem>
+			</List>
+        </FlexBox> -->
+    </FlexBox>
+</core:FragmentDefinition>
