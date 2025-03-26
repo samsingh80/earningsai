@@ -6,20 +6,11 @@
 	xmlns:tnt="sap.tnt"
     >
 
-<!-- 
-    <tnt:ToolPage id="toolPage">
-        <tnt:header width = "100%">
-          <Image src="./images/logo.png"  width="18%" height="10%"/>
-        </tnt:header>
 
 
-        <tnt:mainContents>
-
-            <VBox id="chatBox">
+            <FlexBox id="chatFlexBox" class="ChatFlexBox">
                  <core:Fragment fragmentName="earningsai.fragment.chatBox" type="XML"/>
-            </VBox>
-        </tnt:mainContents>
- </tnt:ToolPage> -->
+            </FlexBox>
 
 
 

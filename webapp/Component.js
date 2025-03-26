@@ -1,7 +1,8 @@
 sap.ui.define([
     "sap/ui/core/UIComponent",
-    "earningsai/model/models"
-], (UIComponent, models) => {
+    "earningsai/model/models",
+    "earningsai/model/chatModel"
+], (UIComponent, models,chatModel) => {
     "use strict";
 
     return UIComponent.extend("earningsai.Component", {
@@ -21,6 +22,17 @@ sap.ui.define([
 
             // enable routing
             this.getRouter().initialize();
+
+            //Set Chat model
+            this.setModel(new chatModel(), "chatModel");
+
+            //RootPath
+            let oRootPath = jQuery.sap.getModulePath("earningsai"); // your resource root
+            let oImageModel = new sap.ui.model.json.JSONModel({
+                path: oRootPath,
+            });
+
+            this.setModel(oImageModel, "imageModel");
         }
     });
 });
