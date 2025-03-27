@@ -4,16 +4,9 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
   const initialData = {
     busyIndicator: false,
     enableSubmit: false,
-    messages: [
-      {
-        message: "Hi",
-        actor: "user",
-      },
-      {
-        message: "Hello How are you!!",
-        actor: "bot",
-        userMessage:"Hi"    }
-    ]
+    userMessage : "",
+    result:      ""
+  
   };
 
   return JSONModel.extend("com.sap.shae.flp.plugins.homepage.chatModel", {

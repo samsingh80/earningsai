@@ -16,7 +16,22 @@ height: 40px !important;
 {
     color: #007aff !important;
 }
-
+.result{
+    position: absolute !important;
+    border: none;
+    border-radius: 16px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
+    opacity: 1;
+    background:  #ffff !important;
+    width: 100% !important;
+    padding:3rem;
+    max-width: 1200px; 
+    
+}
+.ResultFlexBox{
+    margin-top: 2rem;
+    
+}
 .ChatFlexBox{
     padding: 2rem;
     flex: 1;
@@ -35,8 +50,7 @@ height: 40px !important;
     width: 100% !important;
     padding:3rem;
     max-width: 1200px;
-    bottom: 2rem !important;
-    top: 2rem !important;
+ 
 }
 
 .dynamicChatBox {

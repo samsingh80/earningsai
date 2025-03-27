@@ -6,14 +6,13 @@
 	xmlns:tnt="sap.tnt"
     >
 
-
-
             <FlexBox id="chatFlexBox" class="ChatFlexBox">
                  <core:Fragment fragmentName="earningsai.fragment.chatBox" type="XML"/>
             </FlexBox>
 
-
-
+            <FlexBox id="resultFlexBox" class="ResultFlexBox">
+                 <core:Fragment fragmentName="earningsai.fragment.resultBox" type="XML"/>
+            </FlexBox>
 
 
 </mvc:View>
