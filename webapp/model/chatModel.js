@@ -4,6 +4,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
   const initialData = {
     busyIndicator: false,
     enableSubmit: false,
+    visibleResult:false,
     userMessage : "",
     result:      ""
   
@@ -36,32 +37,21 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
     },
 
     /**
-     * Set User Chat Message
+     * Set Enable Result Box
      *
-     * @param {String}  message
+     * @param {Boolean}  value
      */
-    addUserChat: function (message) {
-      let amsg = this.getProperty("/messages");
-      amsg.push({
-        message: message,
-        actor: "user",
-      });
-      this.setProperty("/messages", amsg);
+    setvisibleResult: function (visibleResult) {
+      this.setProperty("/visibleResult", visibleResult);
     },
-
+   
     /**
      * Set Bot Chat Message
      *
      * @param {String}  message
      */
-    addBotChat: function (message,userMessage) {
-      let amsg = this.getProperty("/messages");
-      amsg.push({
-        message: message,
-        userMessage:userMessage,
-        actor: "bot",
-      });
-      this.setProperty("/messages", amsg);
+    setResult: function (result) {
+      this.setProperty("/result", result);
     },
   });
 });
