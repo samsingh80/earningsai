@@ -2,15 +2,41 @@
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-    <FlexBox id="ChatBot" class="ChatBox dasTextAreaInput" >
+    
+  <VBox class="ChatBox dasTextAreaInput"  >
+      <FlexBox id="ChatBotresult"  >
+
         <TextArea id="chatFeedInput" width="96%" class="chattextarea" liveChange="userlivechange" value="{chatModel>/userMessage}" enabled="{= !${chatModel>/busyIndicator} }" rows="1" growingMaxLines="23" placeholder="Message" growing="true">
                 <layoutData>
                     <FlexItemData growFactor="1" />
                 </layoutData>
             </TextArea>
-            <Button id="chatFeedSubmit" icon="sap-icon://paper-plane" type="Emphasized" press="onUserChat" class="dasChatInputSubmitButton sapUiTinyMargin"  enabled="{chatModel>/enableSubmit}" />
+            <!-- <Button id="chatFeedSubmit" icon="sap-icon://paper-plane" type="Emphasized" press="onUserChat" class="dasChatInputSubmitButton sapUiTinyMargin"  enabled="{chatModel>/enableSubmit}" /> -->
 
         </FlexBox>
+  
+              <FlexBox id="chatBusyIndicator1" visible="{chatModel>/busyIndicator}" justifyContent="Center" alignItems="Center" class="busyBox">
+                  <BusyIndicator id = "busyind" text="Processing your request. Please standby.."  size="1rem" class="busyIndicator"/>
+            </FlexBox>
+
+                <FlexBox id="btncontrolls" justifyContent= "Start" alignItems="Start" class="busyBox">
+                <Button icon="sap-icon://upload" class="myMicrophoneIcon" enabled="false" ></Button>
+               
+                 <Button icon="sap-icon://microphone"  enabled="false" ></Button>
+                
+                 <Button text="Ask FinSight"  enabled="{chatModel>/enableSubmit}" press="onUserChat" >
+ 
+                 </Button>
+                  <Button text="Generate Embeddingss" enabled="false" ></Button>
+
+                  
+                   <!-- <Button text="test2"></Button> -->
+            </FlexBox>
+  
+  </VBox>  
+
+
+
 
 
 

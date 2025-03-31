@@ -9,6 +9,7 @@
   ],
   "main": "webapp/index.html",
   "dependencies": {
+    "generator-easy-ui5": "^3.8.1",
     "jspdf": "^3.0.1"
   },
   "devDependencies": {

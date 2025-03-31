@@ -9,7 +9,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
     result:      ""
   
   };
-
+ 
   return JSONModel.extend("com.sap.shae.flp.plugins.homepage.chatModel", {
     /**
      * Constructor for the Chat Model - initialize the data
@@ -53,5 +53,9 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
     setResult: function (result) {
       this.setProperty("/result", result);
     },
+
+    setbusyIndicator: function (busyind){
+      this.setProperty("/busyIndicator",  busyind);
+    }
   });
 });

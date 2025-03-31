@@ -15,12 +15,18 @@ server:
             - /resources
             - /test-resources
           url: https://ui5.sap.com
+          backend:
+          - path: /api
+            url: https://EarningsAIAssistantUI5-noisy-numbat-gk.cfapps.ap11.hana.ondemand.com
+            destination: earningsai 
+
     - name: fiori-tools-appreload
       afterMiddleware: compression
       configuration:
         port: 35729
         path: webapp
         delay: 300
+
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:

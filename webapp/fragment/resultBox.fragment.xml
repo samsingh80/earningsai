@@ -5,10 +5,8 @@
     xmlns:core="sap.ui.core"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
 
-<FlexBox id="ChatBotResult" class="result" direction="Column">
-                <FlexBox id="chatBusyIndicator1" visible="{chatModel>/busyIndicator}" justifyContent="Center" alignItems="Center" class="busyBox">
-                    <BusyIndicator size="1rem" class="busyIndicator"/>
-                </FlexBox>
+<FlexBox id="ChatBotResult" class="result" visible="{chatModel>/visibleResult}" direction="Column">
+
                             <FlexBox class="summaryBox">
                                         <Title  text="SUMMARY" class="summaryTitle"></Title>
                                          <HBox class="messageEmotions" id="messageEmotions">

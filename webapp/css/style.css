@@ -7,6 +7,26 @@
   color: #007aff !important;
 }
 
+
+
+.sapUiSizeCompact .sapMBtnInner.sapMBtnText {
+  background-color: #007aff !important;
+  color: white !important;
+  border-radius: 8px; /* Optional: Adds rounded corners */
+  /* margin-left: 5px; */
+}
+
+.iconbtns {
+  background-color: #007aff !important;
+
+} 
+
+.sapMFlexItemAlignAuto {
+  margin-left: 10px;
+
+}
+
+
 .logo {
   height: 40px !important;
 }
@@ -15,6 +35,7 @@
 .navListIcon .sapMText {
   color: #007aff !important;
 }
+
 
 .earningsBox {
   align-items: center;
@@ -43,10 +64,11 @@
   border: none;
   border-radius: 16px;
   box-shadow: rgba(0, 0, 0, 0.3) 0px 0px 10px 1px;
-  background: #ffff !important;
+  background: hsl(0, 0%, 100%) !important;
   width: 100% !important;
   padding: 3rem;
   max-width: 1200px;
+  background-color: lightgray;
 }
 
 .dynamicChatBox {
@@ -233,7 +255,7 @@
 } */
 
 .dasTextAreaInput:focus-within,
-.dasTextAreaInput:hover {
+/* .dasTextAreaInput:hover {
   border-width: 0.125rem;
   border-color: var(
     --dasContent_FocusColor,
@@ -244,22 +266,26 @@
     --dasFooter_ButtonShadow,
     var(--sapContent_Interaction_Shadow)
   );
-}
+} */  /* remove this comment to have border in the flex box */
 
 .chattextarea {
   width: 100% !important;
   height: 100% !important;
   padding: 5px 0px 7px 8px;
   gap: 10px;
-  opacity: 0px;
+
   max-width: 100%;
-  border: none !important;
+  /* border: none !important; */
+  /* border-width: 2rem; */
+  border:#0070f2
 }
 
 .chattextarea .sapMInputBaseContentWrapper {
-  border: none !important;
+  /* border: none !important; */
   box-shadow: none !important;
   background: none !important;
+  border:#0070f2
+
 }
 
 .chattextarea
@@ -267,12 +293,14 @@
   .sapMInputBaseInner:not(.sapMInputBaseReadonlyWrapper):not(
     .sapMInputBaseContentWrapperState
   ):focus {
-  border: none !important;
+  /* border: none !important; */
+  border:#0070f2
 }
 
 .chattextarea
   .sapMInputBaseContentWrapper:not(.sapMInputBaseDisabledWrapper)::before {
-  border: none !important;
+  /* border: none !important; */
+  border:#0070f2
 }
 
 .dasChatInputSubmitButtonDisabled {

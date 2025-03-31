@@ -13,6 +13,6 @@
                 <tnt:NavigationListItem id="settings" text="{i18n>settings}" tooltip="{i18n>settings}" icon="sap-icon://action-settings" key="home" />
 				<tnt:NavigationListItem id="help" text="{i18n>help}"  tooltip="{i18n>help}" icon="sap-icon://sys-help" key="action" />
 			</tnt:NavigationList>
-          
+
         </tnt:SideNavigation>
 </core:FragmentDefinition>
