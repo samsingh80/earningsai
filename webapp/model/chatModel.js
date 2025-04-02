@@ -5,6 +5,8 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
     busyIndicator: false,
     enableSubmit: false,
     visibleResult:false,
+    enableUpload: false,
+    enableQuery:false,
     userMessage : "",
     result:      ""
   
@@ -56,6 +58,15 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
 
     setbusyIndicator: function (busyind){
       this.setProperty("/busyIndicator",  busyind);
+    },
+
+    setenableUpload: function (uploadflag){
+      this.setProperty("/enableUpload",  uploadflag);
+    },
+
+    setenableQuery: function (equery){
+      this.setProperty("/enableQuery",  equery);
     }
+
   });
 });

@@ -20,14 +20,14 @@
             </FlexBox>
 
                 <FlexBox id="btncontrolls" justifyContent= "Start" alignItems="Start" class="busyBox">
-                <Button icon="sap-icon://upload" class="myMicrophoneIcon" enabled="false" ></Button>
+                <Button icon="sap-icon://upload" class="myMicrophoneIcon"  visible="{chatModel>/enableUpload}" ></Button>
                
-                 <Button icon="sap-icon://microphone"  enabled="false" ></Button>
+                 <Button icon="sap-icon://microphone"  visible="{chatModel>/enableUpload}" ></Button>
                 
-                 <Button text="Ask FinSight"  enabled="{chatModel>/enableSubmit}" press="onUserChat" >
+                 <Button text="Ask FinSight"  enabled="{chatModel>/enableSubmit}" visible="{chatModel>/enableQuery}" press="onUserChat" >
  
                  </Button>
-                  <Button text="Generate Embeddingss" enabled="false" ></Button>
+                  <Button text="Generate Embeddingss"  visible="{chatModel>/enableUpload}" ></Button>
 
                   
                    <!-- <Button text="test2"></Button> -->

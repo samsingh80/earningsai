@@ -2,6 +2,23 @@
   "xsappname": "earningsai",
   "tenant-mode": "dedicated",
   "description": "Security profile of called application",
-  "scopes": [],
-  "role-templates": []
+  "scopes": [
+    {
+      "name": "$XSAPPNAME.scopeforview"
+  },{
+      "name": "$XSAPPNAME.scopeformanage"
+  }
+
+
+
+  ],
+  "role-templates": [
+    {
+      "name": "UserRole",
+      "scope-references": ["$XSAPPNAME.scopeforview"]
+  },{
+      "name": "ManagerRole",
+      "scope-references": ["$XSAPPNAME.scopeforview",  "$XSAPPNAME.scopeformanage"]
+  }
+  ]
 }

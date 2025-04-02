@@ -2,7 +2,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
   "use strict";
 
   return Controller.extend("earningsai.controller.EarningsView", {
-    onInit() {},
+    onInit() {
+
+      this.onfetchRoles().then(resp=> console.log("resp" + resp));
+
+
+    },
 
     onAfterRendering: function () {
       let me = this;
@@ -57,28 +62,8 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
       // triggerChat(this, sInput);
       // const sResponse = "";
       
-    //   $.ajax({
-    //     url: "/api/chat",
-    //     type: "POST",
-    //     contentType: "application/json",
-    //     data: JSON.stringify({ "message": "top 5 earning" }),
-    //     success: function (data) {
-    //          sResponse = data.result;  // ✅ Store API response in a variable
-    //         console.log("API Response:", sResponse);
-            
-    //         // Optional: Store result in SAPUI5 Model
-    //         var oModel = new sap.ui.model.json.JSONModel({ apiResult: sResponse });
-    //         sap.ui.getCore().setModel(oModel, "chatModel");
-    //     },
-    //     error: function (xhr, status, error) {
-    //         console.error("API Error:", error);
-    //     }
-    // });
-  
-    
       const Resp = "";
-
-
+      
       this.onfetchData(sInput).then(resp=> {
           
       chatModel.setbusyIndicator(false);
@@ -118,8 +103,6 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
 
     onfetchData: async function (sInput) {
 
-
-
       const url = "https://EarningsAIAssistantUI5-noisy-numbat-gk.cfapps.ap11.hana.ondemand.com/api/chat";
   
       try {
@@ -148,7 +131,45 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
       }
       
     },
+     
+    onfetchRoles : async function (params) {
+      const chatModel = this.getOwnerComponent().getModel("chatModel");
+      const url = this.getBaseURL() + "/user-api/currentUser";
+      try {
+        const response = await fetch(url, {
+            method: "GET",
+            headers: { "Content-Type": "application/json" }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+        const data = await response.json();
+        const roles = data.scopes;
+        const hasScopeForView = roles.some(role => role.includes("scopeforview"));
+        const hasScopeForManage = roles.some(role => role.includes("scopeformanage"));
+        // chatModel.setenablUpload(hasScopeForManage);
+        // chatModel.setenableQuery(hasScopeForView);    
+        chatModel.setProperty("/enableUpload",hasScopeForManage);
+        chatModel.setProperty("/enableQuery",hasScopeForView);    
+        const sResponse = data.result;  // ✅ Store API response in a variable
+        console.log("API Response:", sResponse);
+        return sResponse;
 
+    } catch (error) {
+        console.error("API Error:", error);
+    }
+
+
+
+      
+    },
+
+    getBaseURL: function () {
+      var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
+      var appPath = appId.replaceAll(".", "/");
+      var appModulePath = jQuery.sap.getModulePath(appPath);
+      return appModulePath;
+  },   
 
     /**
      * Regenerate the Agent Chat

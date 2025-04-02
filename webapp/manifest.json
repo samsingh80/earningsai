@@ -7,6 +7,20 @@
     "applicationVersion": {
       "version": "0.0.1"
     },
+    "crossNavigation": {
+      "inbounds": {
+        "Copilot-launch": {
+          "semanticObject": "Copilot",
+          "action": "launch",
+          "title": "{{flpTitle}}",
+          "icon": "sap-icon://create-leave-request",
+          "signature": {
+            "parameters": {},
+            "additionalParameters": "allowed"
+          }
+        }
+      }
+    },
     "title": "{{appTitle}}",
     "description": "{{appDescription}}",
     "resources": "resources.json",
@@ -16,6 +30,7 @@
       "toolsId": "983efb2e-0d9d-4105-8e3e-34c3a43ba8bc"
     }
   },
+
   "sap.ui": {
     "technology": "UI5",
     "icons": {
@@ -32,6 +47,7 @@
       "phone": true
     }
   },
+
   "sap.ui5": {
     "flexEnabled": true,
     "dependencies": {
@@ -99,4 +115,5 @@
     "public": true,
     "service": "earningsai"
   }
+
 }
