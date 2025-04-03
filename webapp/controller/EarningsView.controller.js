@@ -1,9 +1,14 @@
-sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
+sap.ui.define(["sap/ui/core/mvc/Controller",
+    "../lib/jspdf/jspdf.umd.min",
+    "../lib/dompurify/purify.min",
+    "../lib/html2canvas/html2canvas.min"
+], (Controller) => {
   "use strict";
 
   return Controller.extend("earningsai.controller.EarningsView", {
     onInit() {
-
+      let oView = this.getView();
+      oView.setBusy(false); // Show busy indicator
       this.onfetchRoles().then(resp=> console.log("resp" + resp));
 
 
@@ -53,6 +58,7 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
       const chatModel = this.getOwnerComponent().getModel("chatModel");
       //disable submit button
       chatModel.setSubmit(false);
+      chatModel.setbusyText("Processing your request. Please standby..");
       chatModel.setbusyIndicator(true);
       chatModel.setvisibleResult(false);
 
@@ -194,15 +200,117 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], (Controller) => {
      * @param {object} oEvent
      * @param {object} controller
      */
-    onChatExport: function (oEvent) {
+    onChatExport: async function (oEvent) {
       const chatModel = this.getOwnerComponent().getModel("chatModel");
-      const oSource = oEvent?.getSource();
-      const message = oSource?.data("message");
+      const message = chatModel.getProperty("/result");
       if (message) {
-        const doc = new jsPDF();
-        doc.text("Hello world!", 10, 10);
-        doc.save("a4.pdf");
+        // Create PDF document
+        var doc = new jspdf.jsPDF({
+          orientation: "portrait",
+          unit: "pt",
+          format: "a4",
+        });
+
+        // Sanitize the HTML using DOMPurify
+        var sanitizedHTML = DOMPurify.sanitize(message);
+        await doc.html(sanitizedHTML, {
+          width: 580,
+          windowWidth: 580,
+          margin: 15,
+        });
+        await doc.save();
       }
     },
+    
+   onGenEmbeddings: async function(){
+
+    const chatModel = this.getOwnerComponent().getModel("chatModel");
+    const url = "https://EarningsAIAssistantUI5-noisy-numbat-gk.cfapps.ap11.hana.ondemand.com/api/generate-embeddings";
+    chatModel.setbusyText("Creating embeddings, please wait");
+    chatModel.setbusyIndicator(true);
+
+
+    try {
+        const response = await fetch(url, {
+            method: "POST",
+        });
+
+        if (!response.ok) {
+          chatModel.setbusyIndicator(false);
+           sap.m.MessageToast.show(response.status);
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        const sResponse = data.message;  // ✅ Store API response in a variable
+      if (sResponse) {
+        chatModel.setbusyIndicator(false);
+      sap.m.MessageToast.show(data.message);
+      return;
+  }
+        return sResponse;
+   
+    } catch (error) {
+      chatModel.setbusyIndicator(false);
+        console.error("API Error:", error);
+    }     
+
+   },
+   
+
+
+    onUploadFileContent: async function(oFile) {
+      const chatModel = this.getOwnerComponent().getModel("chatModel");
+      chatModel.setbusyText("File is getting uploaded");
+      chatModel.setbusyIndicator(true);
+      const url = "https://EarningsAIAssistantUI5-noisy-numbat-gk.cfapps.ap11.hana.ondemand.com/api/upload";
+      let formData = new FormData();
+      formData.append("file", oFile);
+  
+      try {
+          const response = await fetch(url, {
+              method: "POST",
+              body : formData
+          });
+  
+          if (!response.ok) {
+            chatModel.setbusyIndicator(false);
+             sap.m.MessageToast.show(response.status);
+              throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+  
+          const data = await response.json();
+          const sResponse = data.message;  // ✅ Store API response in a variable
+        if (sResponse) {
+          chatModel.setbusyIndicator(false);
+        sap.m.MessageToast.show(data.message);
+        return;
+    }
+          return sResponse;
+          
+  
+          // Optional: Store result in SAPUI5 JSONModel
+          // var oModel = new sap.ui.model.json.JSONModel({ apiResult: sResponse });
+          // sap.ui.getCore().setModel(oModel, "chatModel");
+  
+      } catch (error) {
+          console.error("API Error:", error);
+      }     
+
+      
+    },
+
+    onFileUpload: async function (oEvent) {
+
+      let oFileUploader = oEvent.getSource();
+      const oFile = oEvent.getParameters("files").files[0];
+     
+
+    this.onUploadFileContent(oFile);
+
+
+       
+    }
+
   });
 });

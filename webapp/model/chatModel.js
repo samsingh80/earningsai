@@ -8,6 +8,7 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
     enableUpload: false,
     enableQuery:false,
     userMessage : "",
+    busyText:"",
     result:      ""
   
   };
@@ -66,6 +67,9 @@ sap.ui.define(["sap/ui/model/json/JSONModel"], function (JSONModel) {
 
     setenableQuery: function (equery){
       this.setProperty("/enableQuery",  equery);
+    },
+    setbusyText: function (text){
+      this.setProperty("/busyText",  text);
     }
 
   });

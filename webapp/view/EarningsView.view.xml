@@ -8,6 +8,7 @@
     <Page>
     <content>
     <FlexBox direction="Column" class="earningsBox">
+
             <FlexBox id="chatFlexBox" class="ChatFlexBox">
                  <core:Fragment fragmentName="earningsai.fragment.chatBox" type="XML"/>
             </FlexBox>

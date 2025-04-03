@@ -1,8 +1,10 @@
 <core:FragmentDefinition xmlns="sap.m"
     xmlns:f="sap.f"
     xmlns:core="sap.ui.core"
+    xmlns:u="sap.ui.unified"
     xmlns:app="http://schemas.sap.com/sapui5/extension/sap.ui.core.CustomData/1">
-    
+
+ 
   <VBox class="ChatBox dasTextAreaInput"  >
       <FlexBox id="ChatBotresult"  >
 
@@ -16,21 +18,30 @@
         </FlexBox>
   
               <FlexBox id="chatBusyIndicator1" visible="{chatModel>/busyIndicator}" justifyContent="Center" alignItems="Center" class="busyBox">
-                  <BusyIndicator id = "busyind" text="Processing your request. Please standby.."  size="1rem" class="busyIndicator"/>
+                  <BusyIndicator id = "busyind" text="{chatModel>/busyText}"  size="1rem" class="busyIndicator"/>
             </FlexBox>
 
                 <FlexBox id="btncontrolls" justifyContent= "Start" alignItems="Start" class="busyBox">
-                <Button icon="sap-icon://upload" class="myMicrophoneIcon"  visible="{chatModel>/enableUpload}" ></Button>
-               
-                 <Button icon="sap-icon://microphone"  visible="{chatModel>/enableUpload}" ></Button>
+                <!-- <Button icon="sap-icon://upload" class="myMicrophoneIcon"  visible="{chatModel>/enableUpload}" ></Button> -->
+
+                     <u:FileUploader id="fileUploader"
+                    
+                      buttonOnly = "true"
+                      iconOnly = "true"
+                      change="onFileUpload"
+                      uploadComplete="onUploadComplete"
+                      icon="sap-icon://upload"
+                      tooltip="Upload File"
+                      style="Emphasized"
+                       visible="{chatModel>/enableUpload}"/> 
+
+                 <Button icon="sap-icon://microphone"  visible="{chatModel>/enableUpload}" ></Button> 
                 
                  <Button text="Ask FinSight"  enabled="{chatModel>/enableSubmit}" visible="{chatModel>/enableQuery}" press="onUserChat" >
  
                  </Button>
-                  <Button text="Generate Embeddingss"  visible="{chatModel>/enableUpload}" ></Button>
+                  <Button text="Generate Embeddingss"  visible="{chatModel>/enableUpload}"  press="onGenEmbeddings"></Button>
 
-                  
-                   <!-- <Button text="test2"></Button> -->
             </FlexBox>
   
   </VBox>  
